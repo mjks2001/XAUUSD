@@ -37,11 +37,11 @@ async def binance_orderbook_listener():
             print(f"Binance WS Error: {e}. Reconnecting...")
             await asyncio.sleep(5)
 
-# --- دالة Hyperliquid ---
+# --- دالة Hyperliquid (تم تعديل الرمز إلى PAXG) ---
 async def hyperliquid_listener():
     global live_hyperliquid
     url = "wss://api.hyperliquid.xyz/ws"
-    subscribe_msg = {"method": "subscribe", "subscription": {"type": "l2Book", "coin": "GOLD"}}
+    subscribe_msg = {"method": "subscribe", "subscription": {"type": "l2Book", "coin": "PAXG"}}
     
     while True:
         try:
@@ -71,7 +71,7 @@ async def startup_event():
     asyncio.create_task(binance_orderbook_listener())
     asyncio.create_task(hyperliquid_listener())
 
-# --- واجهة المستخدم (HTML) بعد مسح التداولات ---
+# --- واجهة المستخدم (HTML) ---
 HTML_PAGE = """
 <!DOCTYPE html>
 <html>
@@ -99,7 +99,7 @@ HTML_PAGE = """
     <h1>XAUUSDT Pro (Binance vs Hyperliquid)</h1>
     
     <div class="hl-panel">
-        <h3>Hyperliquid (GOLD)</h3>
+        <h3>Hyperliquid (PAXG)</h3>
         <div style="display: flex; justify-content: space-around;">
             <div>Bid: <span id="hl-bid" style="color:#33ff33; font-weight:bold;">--</span></div>
             <div>Ask: <span id="hl-ask" style="color:#ff3333; font-weight:bold;">--</span></div>
